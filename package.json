@@ -1,0 +1,21 @@
+{
+  "name": "taskcompleter",
+  "version": "1.0.0",
+  "description": "set times and dates for tasks to be completed and mark them as pending or complete",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "github": "https://github.com/ho-ian/taskCompleter.git",
+  "keywords": [
+    "node",
+    "javascript",
+    "entity",
+    "task",
+    "web",
+    "express",
+    "http"
+  ],
+  "author": "Ian Ho <ho.ian96@gmail.com> (ianhoportfolio.com)",
+  "license": "ISC"
+}
