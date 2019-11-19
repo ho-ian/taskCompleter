@@ -15,6 +15,7 @@ export default function makeRemoveTask ({ tasksDb }) {
 
     function deleteNothing() {
         return {
+            deleteCount: 0,
             message: 'Task not found, nothing to delete.'
         }
     }
@@ -22,6 +23,7 @@ export default function makeRemoveTask ({ tasksDb }) {
     async function hardDelete(task) {
         await tasksDb.remove(task)
         return {
+            deleteCount: 1,
             message: 'Task deleted.'
         }
     }
