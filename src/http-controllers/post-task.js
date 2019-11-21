@@ -3,7 +3,7 @@ export default function makePostTask ({ addTask }) {
         try {
             const { source = {}, ...taskInfo } = httpRequest.body
             source.ip = httpRequest.ip
-            source.browser = httpRequest.headers['Users-Agent']
+            source.browser = httpRequest.headers['User-Agent']
             if (httpRequest.headers['Referrer']) {
                 source.referrer = httpRequest.headers['Referrer']
             }

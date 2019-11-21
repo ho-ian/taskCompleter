@@ -9,7 +9,7 @@ export default function buildMakeSource ({isValidIp}) {
         return Object.freeze({
             getIp: () => ip,
             getBrowser: () => browser,
-            getRefferer: () => referrer
+            getReferrer: () => referrer
         })
     }
 }

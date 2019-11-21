@@ -6,10 +6,10 @@ import notFound from './not-found'
 
 import { addTask, editTask, removeTask, listTasks } from '../use-cases'
 
-const postTask = makePostTask(addTask)
-const deleteTask = makeDeleteTask(removeTask)
-const getTasks = makeGetTasks(listTasks)
-const patchTask = makePatchTask(editTask)
+const postTask = makePostTask({ addTask })
+const deleteTask = makeDeleteTask({ removeTask })
+const getTasks = makeGetTasks({ listTasks })
+const patchTask = makePatchTask({ editTask })
 
 const taskController = Object.freeze({
     postTask,

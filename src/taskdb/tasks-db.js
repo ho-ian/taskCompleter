@@ -32,18 +32,10 @@ export default function makeTasksDb({ makeDb }) {
         return { id, ...insertedInfo }
     }
 
-    async function findByEnsemble({ taskId, date, start, end, title, author, completed }) {
+    async function findByEnsemble({ ...queryInfo }) {
         const db = await makeDb()
-        const query = {
-            taskId: taskId,
-            date: date,
-            start: start,
-            end: end,
-            title: title,
-            author: author,
-            completed: completed
-        }
-        const result = db.collections('tasks').find(query)
+        const query = {...queryInfo}
+        const result = await db.collection('tasks').find(query)
         return (await result.toArray()).map(({ _id: id, ...found }) => ({
             id,
             ...found
@@ -62,7 +54,7 @@ export default function makeTasksDb({ makeDb }) {
     async function update({ id: _id, ...taskInfo }) {
         const db = await makeDb()
         const result = await db
-            .colllection('tasks')
+            .collection('tasks')
             .updateOne({ _id } , { $set: { ...taskInfo } })
         return result.modifiedCount > 0 ? { id: _id, ...taskInfo } : null
     }

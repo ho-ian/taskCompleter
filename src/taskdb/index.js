@@ -13,5 +13,5 @@ export async function makeDb() {
     return client.db(dbName)
 }
 
-const tasksDb = makeTasksDb({ tasksDb })
+const tasksDb = makeTasksDb({ makeDb })
 export default tasksDb 

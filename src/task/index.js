@@ -27,8 +27,8 @@ function isValidDate(date) {
 
     // Parse the date parts to integers
     var parts = date.split("/");
-    var day = parseInt(parts[1], 10);
-    var month = parseInt(parts[0], 10);
+    var day = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
     var year = parseInt(parts[2], 10);
 
     // Check the ranges of month and year
@@ -46,9 +46,32 @@ function isValidDate(date) {
 }
 
 function isValidTime(time) {
-    //TODO: time is not out of bounds.. i.e. 00 <= HH < 25, etc.
+    var parts = time.split(":");
+    var hour = parseInt(parts[0], 10);
+    var minute = parseInt(parts[1], 10);
+
+    if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+        return false;
+    }
+    return true;
 }
 
 function isValidInterval(startTime, endTime) {
-    //TODO: if startTime > endTime, interval is invalid
+    var startParts = startTime.split(":");
+    var startHour = parseInt(startParts[0], 10);
+    var startMinute = parseInt(startParts[1], 10);
+
+    var endParts = endTime.split(":");
+    var endHour = parseInt(endParts[0], 10);
+    var endMinute = parseInt(endParts[1], 10);
+
+    if (startHour > endHour) {
+        return false;
+    }
+    else if (startHour == endHour) {
+        if (startMinute >= endMinute) { // can't be the same time
+            return false;
+        }
+    }
+    return true;
 }

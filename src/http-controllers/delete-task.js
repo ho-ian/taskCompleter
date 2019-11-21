@@ -4,7 +4,7 @@ export default function makeDeleteTask({ removeTask }) {
             'Content-Type': 'application/json'
         }
         try {
-            const deleted = await removeComment( {id: httpRequest.params.id })
+            const deleted = await removeTask( {id: httpRequest.params.id })
             return {
                 headers,
                 statusCode: deleted.deleteCount === 0 ? 404 : 200,

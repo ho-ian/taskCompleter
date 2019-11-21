@@ -4,6 +4,10 @@
   "description": "set times and dates for tasks to be completed and mark them as pending or complete",
   "main": "index.js",
   "scripts": {
+    "build": "npm run clean && babel src -d dist",
+    "clean": "rimraf dist",
+    "db": "babel-node ./db/index.js",
+    "start": "npm run clean && npm run build && npm run db && cd dist && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "github": "https://github.com/ho-ian/taskCompleter.git",
@@ -17,5 +21,37 @@
     "http"
   ],
   "author": "Ian Ho <ho.ian96@gmail.com> (ianhoportfolio.com)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "babel-plugin-inline-dotenv": "^1.2.2",
+    "body-parser": "^1.18.3",
+    "cuid": "^2.1.6",
+    "express": "^4.16.4",
+    "ip-regex": "^4.0.0",
+    "mongodb": "^3.1.13",
+    "mongodb-memory-server": "^4.0.2",
+    "nodemon": "^1.18.10",
+    "rimraf": "^2.6.3",
+    "dotenv": "^6.2.0",
+    "babel-jest": "^24.4.0",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4"
+  },
+  "babel": {
+    "presets":[
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": true
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "inline-dotenv"
+    ]
+  }
 }
