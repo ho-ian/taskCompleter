@@ -18,7 +18,8 @@ module.exports = function makeExpressCallback (taskController) {
                 res.set(httpResponse.headers)
             }
             res.type('json')
-            res.status(httpResponse.statusCode).send(httpResponse.body)
+            res.status(httpResponse.statusCode)
+            res.send(httpResponse.body)
         })
         .catch(e => res.status(500).send({ error: 'An unknown error has occurred.' }))
     }
