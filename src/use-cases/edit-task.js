@@ -8,20 +8,12 @@ export default function makeEditTask ({ tasksDb }) {
             throw new Error('You must supply a change to the title, description, start, or end time.')
         }
         const existing = await tasksDb.findById({id})
-
         if (!existing) {
             throw new RangeError('Task not found.')
         }
         const task = makeTask({...existing, ...changes, modifiedOn: Date.now()})
         if (task.getHash() === existing.hash) {
-            console.log(task)
             return existing
-        }
-        if (changes.completed == "true") {
-            task.complete()
-        }
-        else {
-            task.incomplete()
         }
         const updated = await tasksDb.update({
             id: task.getId(),

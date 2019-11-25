@@ -19,17 +19,14 @@ export default function buildMakeTask ({Id, md5, makeSource, isValidDate, isVali
         if (!author) {
             throw new Error('Task must have an author.')
         }
-        if (author.length < 2) {
-            throw new Error("Task author's name must be longer than two characters.")
+        if (author.length < 2 || author.length > 32) {
+            throw new Error("Task author's name must be longer than two characters and shorter than 32 characters.")
         }
         if (!taskId) {
             throw new Error('Task must contain a taskId')
         }
         if (!title || title.length < 1 || title.length > 32) {
             throw new Error('Task title must be between one character and thirty two characters long.')
-        }
-        if (!description) {
-            throw new Error('Task description must exist.')
         }
         if (!isValidDate(date)) {
             throw new Error('Task date is invalid.')
@@ -85,7 +82,8 @@ export default function buildMakeTask ({Id, md5, makeSource, isValidDate, isVali
                 (date || '') +
                 (start || '') + 
                 (end || '') + 
-                (completed || '')
+                (completed || '') +
+                (modifiedOn || '' )
             )
         }
     }

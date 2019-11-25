@@ -1,29 +1,49 @@
 import React, { Component } from 'react';
+import logo from './logo.svg';
+import Task from './Task';
+import PostTask from './PostTask';
 import './App.css';
 
-function getTaskInfo(task) {
-	var taskInfo = [task.author, task.title, task.description, task.date, task.start, task.end].join("<+>");
-	return taskInfo;
-}
-
 class App extends Component {
-	state = {
-		data: [],
-		id: ''
+	constructor(props) {
+		super(props);
+		this.state = {
+			data: []
+		};
+		this.render = this.render.bind(this);
+	}
+
+	callAPI = async() => {
+		const res = await fetch('/tasks');
+		const body = await res.json();
+
+		if (res.status !== 200) {
+			throw Error(body.message);
+		}
+		return body;
 	};
   
 	componentDidMount() {
-		fetch('/tasks')
-		.then(res => res.json())
-		.then(json => this.setState({ data: json , id: json.id}))
+		this.callAPI()
+		.then(res => this.setState({ data : res }))
 		.catch(err => console.log(err));
 	}
 
 	render() {
 
+		const tasks = this.state.data.map((task, key) =>
+			<Task refresh={this.render} task={task} key={task.title}/>
+		);
+
+
 		return (
 			<div>
-				<p>{this.state.data.map(getTaskInfo)}</p>
+				<header className="App-header">
+					<img src={logo} className="App-logo" alt="logo" />
+					<h1 className="App-title">Welcome to React</h1>
+				</header>
+				<p>{tasks}</p>
+				<PostTask refresh={this.render}/>
 			</div>
 		);
 	}
