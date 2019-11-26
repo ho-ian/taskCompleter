@@ -29,10 +29,16 @@ class App extends Component {
 		.catch(err => console.log(err));
 	}
 
+	componentDidUpdate() {
+		this.callAPI()
+		.then(res => this.setState({ data: res }))
+		.catch(err => console.log(err));
+	}
+
 	render() {
 
 		const tasks = this.state.data.map((task, key) =>
-			<Task refresh={this.render} task={task} key={task.title}/>
+			<Task task={task} key={task.title}/>
 		);
 
 
@@ -43,7 +49,7 @@ class App extends Component {
 					<h1 className="App-title">Welcome to React</h1>
 				</header>
 				<p>{tasks}</p>
-				<PostTask refresh={this.render}/>
+				<PostTask/>
 			</div>
 		);
 	}

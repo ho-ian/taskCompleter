@@ -36,8 +36,7 @@ class Task extends Component {
 						start={this.props.task.start}
 						end={this.props.task.end}
 						completed={this.props.task.completed}
-						toggleEdit={this.toggleEdit} 
-						refresh={this.props.refresh} />
+						toggleEdit={this.toggleEdit} />
 			);
 		}
 		return (
