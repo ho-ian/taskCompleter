@@ -36,7 +36,8 @@ class Task extends Component {
 						start={this.props.task.start}
 						end={this.props.task.end}
 						completed={this.props.task.completed}
-						toggleEdit={this.toggleEdit} />
+						toggleEdit={this.toggleEdit}
+						toggleState={this.props.toggleState} />
 			);
 		}
 		return (
@@ -44,7 +45,7 @@ class Task extends Component {
 				<button type="button" className="collapsible" onClick={this.toggle}>
 					<h3>{this.props.task.title}</h3>
 				</button>
-				<div class={"content" + (this.state.open ? ' in' : '') + (this.props.task.completed ? ' done' : '')}>
+				<div className={"content" + (this.state.open ? ' in' : '') + ((this.props.task.completed === 'true') ? ' done' : '')}>
 					<h5>{this.props.task.author}</h5>
 					<p>{this.props.task.description}</p>
 					<p>{this.props.task.date}</p>

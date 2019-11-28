@@ -27,8 +27,8 @@ function isValidDate(date) {
 
     // Parse the date parts to integers
     var parts = date.split("/");
-    var day = parseInt(parts[0], 10);
-    var month = parseInt(parts[1], 10);
+    var day = parseInt(parts[1], 10);
+    var month = parseInt(parts[0], 10);
     var year = parseInt(parts[2], 10);
 
     // Check the ranges of month and year

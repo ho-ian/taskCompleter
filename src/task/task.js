@@ -11,7 +11,7 @@ export default function buildMakeTask ({Id, md5, makeSource, isValidDate, isVali
         date,
         start,
         end,
-        completed = false
+        completed = "false"
     } = {}) {
         if (!Id.isValidId(id)) {
             throw new Error('Task must have a valid id.')
@@ -64,12 +64,6 @@ export default function buildMakeTask ({Id, md5, makeSource, isValidDate, isVali
             markDeleted: () => {
                 title = deletedTitle
                 author = 'deleted'
-            },
-            complete: () => {
-                compeleted = true
-            },
-            incomplete: () => {
-                completed = false
             }
         })
 

@@ -4,7 +4,7 @@ export default function makeGetTasks({ listTasks }) {
             'Content-Type': 'application/json'
         }
         try {
-            const { ...parameters } = httpRequest.body
+            const { ...parameters } = httpRequest.query
             const postTasks = await listTasks({...parameters})
             return {
                 headers,
