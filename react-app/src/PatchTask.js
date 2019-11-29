@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import DatePicker from 'react-datepicker';
+import TimePicker from 'rc-time-picker';
+import moment from 'moment';
+import "react-datepicker/dist/react-datepicker.css";
+import 'rc-time-picker/assets/index.css';
 
 class PatchTask extends Component {
 	constructor(props){
@@ -21,7 +26,7 @@ class PatchTask extends Component {
 			},
 			body: JSON.stringify(this.state)
 		});
-		const body = await response.json();
+		const body = await response.json().then(this.props.toggleState());
 
 		console.log(body);
 	}
@@ -33,14 +38,14 @@ class PatchTask extends Component {
 				'Content-Type': 'application/json'
 			}
 		});
-		const body = await response.json();
+		const body = await response.json().then(this.props.toggleState());
 
 		console.log(body);
 	}
 	
 	handleChange = (event) => {
 		this.setState({
-			[event.target.name]: event.target.value,
+			[event.target.name]: event.target.value
 		});
 	}
 
@@ -57,6 +62,27 @@ class PatchTask extends Component {
 		}
 	}
 
+	handleDateChange = (event) => {
+		const date = (event) ? event.toLocaleDateString() : '';
+		this.setState({
+			date: date
+		});
+	}
+
+	handleStartTimeChange = (event) => {
+		var time = (event) ? event.format('HH:mm') : '';
+		this.setState({
+			start: time
+		});
+	}
+
+	handleEndTimeChange = (event) => {
+		var time = (event) ? event.format('HH:mm') : '';
+		this.setState({
+			end: time
+		});
+	}
+
 	render () {
 		return (
 			<div className="PatchTask">
@@ -64,17 +90,17 @@ class PatchTask extends Component {
 					<div className="panel panel-primary">
 					<div className="panel panel-heading">Post a new Task</div>
 						<button type="btn btn-primary close" onClick={this.props.toggleEdit}>X</button>
-						<button type="btn btn-primary close" onClick={() => { if (window.confirm('Are you sure you want to delete this task?')) { this.handleDelete(); this.props.toggleState(); }}}>Delete Task</button>
+						<button type="btn btn-primary close" onClick={() => { if (window.confirm('Are you sure you want to delete this task?')) { this.handleDelete(); }}}>Delete Task</button>
 						<div className="panel panel-body">
-							<strong>title:</strong> <br /> <input type="text" name="title" value={this.state.title} onChange={this.handleChange} /> <br />
-							<strong>description:</strong> <br /> <input type="text" name="description" value={this.state.description} onChange={this.handleChange}/> <br />
-							<strong>date:</strong> <br /> <input type="text" name="date" value={this.state.date} onChange={this.handleChange} /> <br /><br />
-							<strong>start:</strong> <br /> <input type="text" name="start" value={this.state.start} onChange={this.handleChange} /> <br /><br />
-							<strong>end:</strong> <br /> <input type="text" name="end" value={this.state.end} onChange={this.handleChange} /> <br /><br />
+							<strong>Title:</strong> <br /> <input type="text" name="title" minLength="1" maxLength="32" value={this.state.title} onChange={this.handleChange} /> <br />
+							<strong>Description:</strong> <br /> <input type="text" name="description" value={this.state.description} onChange={this.handleChange} /> <br />
+							<strong>Date:</strong> <DatePicker name="date" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange} /> <br />
+							<strong>Start Time:</strong> <TimePicker name="start" value={(this.state.start === '') ? null : new moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br /><br />
+							<strong>End Time:</strong> <TimePicker name="end" value={(this.state.end === '') ? null : new moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br /><br />
 							<input type="checkbox" name="completed" defaultChecked={(this.state.completed === 'true')} onClick={this.handleClick}/>Is the task complete?
 						</div>
 					</div>
-					<button type="btn btn-primary" onClick={ () => { this.handleSubmit(); this.props.toggleEdit(); this.props.toggleState(); } }>Save</button>
+					<button type="btn btn-primary" onClick={ () => { this.handleSubmit(); this.props.toggleEdit();} }>Save</button>
 				</div>
 		);
 	}

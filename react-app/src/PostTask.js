@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import TimePicker from 'rc-time-picker';
 import cuid from 'cuid';
+import moment from 'moment';
 import "react-datepicker/dist/react-datepicker.css";
 import 'rc-time-picker/assets/index.css';
-import moment from 'moment';
-
-const pattern = /..:../;
 
 class PostTask extends Component {
 	constructor(props) {
@@ -30,7 +28,9 @@ class PostTask extends Component {
 			},
 			body: JSON.stringify(this.state)
 		});
-		const body = await response.json();
+		const body = await response.json()
+			.then(this.props.toggleState())
+			.then(this.reset());
 
 		console.log(body);
 	}
@@ -42,22 +42,23 @@ class PostTask extends Component {
 	}
 
 	handleDateChange = (event) => {
+		const date = (event) ? event.toLocaleDateString() : '';
 		this.setState({
-			date: event.toLocaleDateString()
+			date: date
 		});
 	}
 
 	handleStartTimeChange = (event) => {
-		var time = event.toDate().toTimeString();
+		const time = (event) ? event.format('HH:mm') : '';
 		this.setState({
-			end: (event) ? time.match(pattern)[0] : ''
+			start: time
 		});
 	}
 
 	handleEndTimeChange = (event) => {
-		var time = event.toDate().toTimeString();
+		const time = (event) ? event.format('HH:mm') : '';
 		this.setState({
-			end: (event) ? time.match(pattern)[0] : ''
+			end: time
 		});
 	}
 
@@ -79,13 +80,13 @@ class PostTask extends Component {
 				<div className="panel panel-primary">
 				<div className="panel panel-heading">Post a new Task</div>
 					<div className="panel panel-body">
-						<strong>Author:</strong> <input type="text" name="author" autoComplete="off" value={this.state.author} onChange={this.handleChange} /> <br />
-						<strong>title:</strong> <input type="text" name="title" autoComplete="off" value={this.state.title} onChange={this.handleChange} /> <br />
-						<strong>description:</strong> <input type="text" name="description" autoComplete="off" value={this.state.description} onChange={this.handleChange}/> <br />
-						<strong>date:</strong> <DatePicker name="date" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange}/> <br />
-						<strong>start:</strong> <TimePicker name="start" value={(this.state.start === '') ? null : moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br /><br />
-						<strong>end:</strong> <TimePicker name="end" value={(this.state.end === '') ? null : moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br /><br />
-						<button className="btn btn-primary" onClick={() => {this.handleSubmit(); this.reset(); this.props.toggleState();}}>Post Task</button>
+						<strong>Title:</strong> <input type="text" name="title" minLength="1" maxLength="32" autoComplete="off" value={this.state.title} onChange={this.handleChange} /> <br />
+						<strong>Author:</strong> <input type="text" name="author" minLength="2" maxLength="32" autoComplete="off" value={this.state.author} onChange={this.handleChange} /> <br />
+						<strong>Description:</strong> <input type="text" name="description" autoComplete="off" value={this.state.description} onChange={this.handleChange}/> <br />
+						<strong>Date:</strong> <DatePicker name="date" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange}/> <br />
+						<strong>Start Time:</strong> <TimePicker name="start" value={(this.state.start === '') ? null : moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br /><br />
+						<strong>End Time:</strong> <TimePicker name="end" value={(this.state.end === '') ? null : moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br /><br />
+						<button className="btn btn-primary" onClick={ () => { this.handleSubmit(); } }>Post Task</button>
 					</div>
 				</div>
 			</div>
