@@ -8,9 +8,11 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			didStateChange: false
+			didStateChange: false,
+			openPost: false
 		};
 		this.toggleState = this.toggleState.bind(this);
+		this.toggleOpenPost = this.toggleOpenPost.bind(this);
 	}
 
 	toggleState() {
@@ -19,14 +21,24 @@ class App extends Component {
 		});
 	}
 
+	toggleOpenPost() {
+		this.setState({
+			openPost: !this.state.openPost
+		});
+	}
+
 	render() {
 		return (
 			<div className="App">
 				<header className="App-header">
-					<h1 className="App-title">List of Tasks</h1>
+					<h1 className="App-title">Tasks</h1>
 				</header>
-				<GetTasks toggleState={this.toggleState} didStateChange={this.state.didStateChange}/>
-				<PostTask toggleState={this.toggleState}/>
+				<div className="table">
+					<div className="getandpost">
+						<GetTasks toggleState={this.toggleState} didStateChange={this.state.didStateChange}/>
+						<PostTask toggleState={this.toggleState} toggleOpenPost={this.toggleOpenPost} openPost={this.state.openPost}/>
+					</div>
+				</div>
 			</div>
 		);
 	}

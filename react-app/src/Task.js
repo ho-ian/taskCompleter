@@ -29,6 +29,7 @@ class Task extends Component {
 		if (this.state.isEditing) {
 			return (
 				<PatchTask id={this.props.task.id}
+						taskId={this.props.task.taskId}
 						author={this.props.task.author}
 						title={this.props.task.title}
 						description={this.props.task.description}
@@ -42,16 +43,21 @@ class Task extends Component {
 		}
 		return (
 			<div className="Task">
-				<button type="button" className="collapsible" onClick={this.toggle}>
-					<h3>{this.props.task.title}</h3>
-				</button>
-				<div className={"content" + (this.state.open ? ' in' : '') + ((this.props.task.completed === 'true') ? ' done' : '')}>
+				<div className="task_contents">
+					<button type="button" className="task_toggle" onClick={this.toggle}>
+						<h3 className="task_title">{this.props.task.title}</h3>
+						<div className="icon">
+							<span className={"chevron" + (this.state.open ? ' in' : '')}></span>
+						</div>
+					</button>
+				</div>
+				<div className={"task_items" + (this.state.open ? ' in' : '') + ((this.props.task.completed === 'true') ? ' done' : '')}>
 					<h5>{this.props.task.author}</h5>
-					<p>{this.props.task.description}</p>
-					<p>{this.props.task.date}</p>
-					<p>start: {this.props.task.start}</p>
-					<p>end: {this.props.task.end}</p>
-					<button type="btn btn-primary" onClick={this.toggleEdit}>Edit Task</button>
+					<p>Description: {this.props.task.description}</p>
+					<p>Date: {this.props.task.date}</p>
+					<p>Start Time: {this.props.task.start}</p>
+					<p>End Time: {this.props.task.end}</p>
+					<button type="btn" onClick={this.toggleEdit}>Edit Task</button>
 				</div>
 			</div>
 		);

@@ -69,10 +69,10 @@ export default function buildMakeTask ({Id, md5, makeSource, isValidDate, isVali
 
         function makeHash() {
             return md5(
-                title +
+                taskId +
                 (description || '') +
                 (author || '') +
-                (taskId || '') +
+                (title || '') +
                 (date || '') +
                 (start || '') + 
                 (end || '') + 

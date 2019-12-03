@@ -5,6 +5,7 @@ import TimePicker from 'rc-time-picker';
 import moment from 'moment';
 import "react-datepicker/dist/react-datepicker.css";
 import 'rc-time-picker/assets/index.css';
+import './GetTasks.css';
 
 class GetTasks extends Component {
 	constructor(props) {
@@ -13,7 +14,7 @@ class GetTasks extends Component {
 			data: [],
 			author: '',
 			title:'',
-			date:'',
+			date: (new Date()).toLocaleDateString(),
 			start:'',
 			end:'',
 			complete: false,
@@ -128,20 +129,30 @@ class GetTasks extends Component {
 
 	render() {
 
-		const tasks = this.state.data.map((task, key) =>
-			<Task task={task} key={task.title} toggleState={this.props.toggleState} />
+		const tasks = this.state.data
+			.sort(function (a, b) {
+				const dateA = a.date.split("/");
+				const timeA = a.start.split(":");
+				const dateB = b.date.split("/");
+				const timeB = b.start.split(":");
+
+				return new Date(dateA[2], dateA[0], dateA[1], timeA[0], timeA[1]) - new Date(dateB[2], dateB[0], dateB[1], timeB[0], timeB[1]);
+			})
+			.map((task, key) =>
+			<Task task={task} key={task.taskId} toggleState={this.props.toggleState} />
 		);
 
 		return (
 			<div className="GetTasks">
 				<div className="SearchTasks">
-					Author: <br /> <input type="text" name="author" value={this.state.author} onChange={this.handleChange} /> <br />
-					Title: <br /> <input type="text" name="title" value={this.state.title} onChange={this.handleChange} /> <br />
-					Date: <DatePicker name="date" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange}/> <br />
-					Start Time: <TimePicker name="start" defaultValue={(this.state.start === '') ? null : moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br /><br />
-					End Time: <TimePicker name="end" defaultValue={(this.state.end === '') ? null : moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br /><br />
-					<input type="checkbox" name="completed" checked={this.state.complete} onChange={this.handleComplete}/>Complete 
-					<input type="checkbox" name="completed" checked={this.state.incomplete} onChange={this.handleIncomplete}/>Incomplete
+					<h3>Search Parameters</h3>
+					Title: <input type="text" name="title" autoComplete="off" value={this.state.title} onChange={this.handleChange} /> <br />
+					Author: <input type="text" name="author" autoComplete="off" value={this.state.author} onChange={this.handleChange} /> <br />
+					Date: <DatePicker name="date" autoComplete="off" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange}/> <br />
+					Start Time: <TimePicker name="start" autoComplete="off" defaultValue={(this.state.start === '') ? null : moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br />
+					End Time: <TimePicker name="end" autoComplete="off" defaultValue={(this.state.end === '') ? null : moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br />
+					<input type="checkbox" name="completed" checked={this.state.complete} onChange={this.handleComplete}/>Complete <br />
+					<input type="checkbox" name="completed" checked={this.state.incomplete} onChange={this.handleIncomplete}/>Incomplete <br />
 				</div>
 				<div className="TaskList">{tasks}</div>
 			</div>

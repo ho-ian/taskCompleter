@@ -86,20 +86,17 @@ class PatchTask extends Component {
 	render () {
 		return (
 			<div className="PatchTask">
-					<h3>Editing Task</h3>
-					<div className="panel panel-primary">
-					<div className="panel panel-heading">Post a new Task</div>
+					<div className="panel panel-heading">Editing Task with TaskId: {this.props.taskId}</div>
 						<button type="btn btn-primary close" onClick={this.props.toggleEdit}>X</button>
 						<button type="btn btn-primary close" onClick={() => { if (window.confirm('Are you sure you want to delete this task?')) { this.handleDelete(); }}}>Delete Task</button>
 						<div className="panel panel-body">
-							<strong>Title:</strong> <br /> <input type="text" name="title" minLength="1" maxLength="32" value={this.state.title} onChange={this.handleChange} /> <br />
-							<strong>Description:</strong> <br /> <input type="text" name="description" value={this.state.description} onChange={this.handleChange} /> <br />
-							<strong>Date:</strong> <DatePicker name="date" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange} /> <br />
-							<strong>Start Time:</strong> <TimePicker name="start" value={(this.state.start === '') ? null : new moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br /><br />
-							<strong>End Time:</strong> <TimePicker name="end" value={(this.state.end === '') ? null : new moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br /><br />
+							Title: <input type="text" name="title" autoComplete="off" minLength="1" maxLength="32" value={this.state.title} onChange={this.handleChange} /> <br />
+							Description: <input type="text" name="description" autoComplete="off" value={this.state.description} onChange={this.handleChange} /> <br />
+							Date: <DatePicker name="date" autoComplete="off" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange} /> <br />
+							Start Time: <TimePicker name="start" autoComplete="off" value={(this.state.start === '') ? null : new moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br />
+							End Time: <TimePicker name="end" autoComplete="off" value={(this.state.end === '') ? null : new moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br />
 							<input type="checkbox" name="completed" defaultChecked={(this.state.completed === 'true')} onClick={this.handleClick}/>Is the task complete?
 						</div>
-					</div>
 					<button type="btn btn-primary" onClick={ () => { this.handleSubmit(); this.props.toggleEdit();} }>Save</button>
 				</div>
 		);
