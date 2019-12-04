@@ -79,17 +79,17 @@ class PostTask extends Component {
 		return (
 			<div className="PostTask">
 				<div className="posttask_content">
-					<button type="button" className="posttask_toggle" onClick={ () => {this.props.toggleOpenPost();}}>+</button>
+					<input type="button" className="posttask_toggle" onClick={ () => {this.props.toggleOpenPost(); this.props.toggleButton();}} value={this.props.button}></input>
 				</div>
 				<div className={"posttask_items" + (this.props.openPost ? ' in' : '')}>
 					<h3>Post A New Task</h3>
-					<strong>Title:</strong> <input type="text" name="title" autoComplete="off" minLength="1" maxLength="32" value={this.state.title} onChange={this.handleChange} /> <br />
-					<strong>Author:</strong> <input type="text" name="author" autoComplete="off" minLength="2" maxLength="32" value={this.state.author} onChange={this.handleChange} /> <br />
-					<strong>Description:</strong> <input type="text" name="description" autoComplete="off" value={this.state.description} onChange={this.handleChange} /> <br />
-					<strong>Date:</strong> <DatePicker name="date" autoComplete="off" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange}/> <br />
-					<strong>Start Time:</strong> <TimePicker name="start" autoComplete="off" value={(this.state.start === '') ? null : moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br />
-					<strong>End Time:</strong> <TimePicker name="end" autoComplete="off" value={(this.state.end === '') ? null : moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br />
-					<button className="btn btn-primary" onClick={ () => { this.handleSubmit(); } }>Post Task</button>
+					Title<br /> <input type="text" name="title" autoComplete="off" minLength="1" maxLength="32" value={this.state.title} onChange={this.handleChange} /> <br />
+					Author<br /> <input type="text" name="author" autoComplete="off" minLength="2" maxLength="32" value={this.state.author} onChange={this.handleChange} /> <br />
+					Description<br /> <input type="text" name="description" autoComplete="off" value={this.state.description} onChange={this.handleChange} /> <br />
+					Date<br /> <DatePicker name="date" autoComplete="off" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange}/> <br />
+					Start Time<br /> <TimePicker name="start" autoComplete="off" value={(this.state.start === '') ? null : moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br />
+					End Time<br /> <TimePicker name="end" autoComplete="off" value={(this.state.end === '') ? null : moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br /><br />
+					<button className="btn" onClick={ () => { this.handleSubmit(); } }>Post Task</button>
 				</div>
 			</div>
 		);

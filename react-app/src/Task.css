@@ -1,6 +1,9 @@
+.Task {
+	width: 80%;
+	margin: 0 auto;
+}
+
 .task_contents {
-	background-color: #eee;
-	color: #444;
 	cursor: pointer;
 	width: 100%;
 	border: none;
@@ -8,6 +11,7 @@
 	outline: none;
 	padding: 0;
 	font-size: 15px;
+	
 }
 
 .task_toggle {
@@ -19,35 +23,58 @@
 	text-align:left;
 	overflow:hidden;
 	white-space:nowrap;
+	background-color: #2A2B2DFF;
+}
+
+.task_toggle:hover {
+	background-color: #1C1C1BFF;
+}
+
+.task_toggle:hover .chevron{
+	color:#FF291CFF;
+}
+
+.task_toggle:hover .chevron.done {
+	color: #53C567FF;
 }
 
 .task_title {
 	padding-left: 18px;
 	width: 50%;
 	display:inline-block;
+	color: #DA291CFF;
 }
 
-.active, .task_contents:hover {
-	background-color:#ccc;
+.task_toggle:hover .task_title {
+	color:#FF291CFF;
+}
+
+.task_title.done {
+	color: #53A567FF;
+}
+
+.task_toggle:hover .task_title.done {
+	color: #53C567FF;
 }
 
 .task_items {
 	padding-left: 18px;
 	padding-bottom: 18px;
-	background-color: #ff0000;
+	background-color: #DA291CFF;
 	overflow: hidden;
-	display:none;
-	transition: height 0.3s ease-in;
+	display: none;
+	height:0;
+	transition: all 0.3s;
 }
 
 .task_items.done {
-	background-color: #00ff00;
+	background-color: #53A567FF;
 }
 
 .task_items.in {
 	display: block;
 	height: 100%;
-	transition: height 0.3s ease-out;
+	transition: all 0.3s;
 }
 
 .chevron {
@@ -59,14 +86,20 @@
 	position: relative;
 	transform: rotate(135deg);
 	width: 0.45em;
-	right: 2em;
+	right: 3em;
 	bottom:0.2em;
 	float:right;
+	color: #DA291CFF;
 }
 
 .chevron.in {
 	transform: rotate(315deg);
 }
+
+.chevron.done {
+	color: #53A567FF;
+}
+
 
 .icon {
 	width: 50%;

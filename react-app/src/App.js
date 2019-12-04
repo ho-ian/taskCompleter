@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GetTasks from './GetTasks';
-import PostTask from './PostTask';
+
 import './App.css';
 
 class App extends Component {
@@ -31,14 +31,9 @@ class App extends Component {
 		return (
 			<div className="App">
 				<header className="App-header">
-					<h1 className="App-title">Tasks</h1>
+					<h1 className="App-title">Task Scheduler</h1>
 				</header>
-				<div className="table">
-					<div className="getandpost">
-						<GetTasks toggleState={this.toggleState} didStateChange={this.state.didStateChange}/>
-						<PostTask toggleState={this.toggleState} toggleOpenPost={this.toggleOpenPost} openPost={this.state.openPost}/>
-					</div>
-				</div>
+				<GetTasks toggleState={this.toggleState} didStateChange={this.state.didStateChange} toggleOpenPost={this.toggleOpenPost} openPost={this.state.openPost}/>
 			</div>
 		);
 	}

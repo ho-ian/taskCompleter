@@ -4,6 +4,7 @@ import TimePicker from 'rc-time-picker';
 import moment from 'moment';
 import "react-datepicker/dist/react-datepicker.css";
 import 'rc-time-picker/assets/index.css';
+import './PatchTask.css';
 
 class PatchTask extends Component {
 	constructor(props){
@@ -85,19 +86,24 @@ class PatchTask extends Component {
 
 	render () {
 		return (
-			<div className="PatchTask">
-					<div className="panel panel-heading">Editing Task with TaskId: {this.props.taskId}</div>
-						<button type="btn btn-primary close" onClick={this.props.toggleEdit}>X</button>
-						<button type="btn btn-primary close" onClick={() => { if (window.confirm('Are you sure you want to delete this task?')) { this.handleDelete(); }}}>Delete Task</button>
-						<div className="panel panel-body">
-							Title: <input type="text" name="title" autoComplete="off" minLength="1" maxLength="32" value={this.state.title} onChange={this.handleChange} /> <br />
-							Description: <input type="text" name="description" autoComplete="off" value={this.state.description} onChange={this.handleChange} /> <br />
-							Date: <DatePicker name="date" autoComplete="off" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange} /> <br />
-							Start Time: <TimePicker name="start" autoComplete="off" value={(this.state.start === '') ? null : new moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br />
-							End Time: <TimePicker name="end" autoComplete="off" value={(this.state.end === '') ? null : new moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br />
-							<input type="checkbox" name="completed" defaultChecked={(this.state.completed === 'true')} onClick={this.handleClick}/>Is the task complete?
-						</div>
-					<button type="btn btn-primary" onClick={ () => { this.handleSubmit(); this.props.toggleEdit();} }>Save</button>
+			<div className={"PatchTask" + ((this.state.completed === 'true') ? ' done' : '')}>
+					<div className="patchtask_content">
+						<h3>Editing Task with TaskId: {this.props.taskId}</h3>
+						<button type="btn" className="cancel" onClick={this.props.toggleEdit}>×</button>
+					</div>
+						
+					<div className="patchtask_items">
+						Title <input type="text" name="title" autoComplete="off" minLength="1" maxLength="32" value={this.state.title} onChange={this.handleChange} /> <br />
+						Description <input type="text" name="description" autoComplete="off" value={this.state.description} onChange={this.handleChange} /> <br />
+						Date <DatePicker name="date" autoComplete="off" selected={(this.state.date) ? new Date(this.state.date) : ''} onChange={this.handleDateChange} /> <br />
+						Start Time <TimePicker name="start" autoComplete="off" value={(this.state.start === '') ? null : new moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br />
+						End Time <TimePicker name="end" autoComplete="off" value={(this.state.end === '') ? null : new moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br />
+						<input type="checkbox" name="completed" defaultChecked={(this.state.completed === 'true')} onClick={this.handleClick}/>Is the task complete?
+					</div>
+					<div className="patchtask_savedelete">
+						<button type="btn" onClick={ () => { this.handleSubmit(); this.props.toggleEdit();} }>Save</button>
+						<button type="btn" onClick={() => { if (window.confirm('Are you sure you want to delete this task?')) { this.handleDelete(); }}}>Delete Task</button>
+					</div>
 				</div>
 		);
 	}

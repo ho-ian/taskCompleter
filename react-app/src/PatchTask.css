@@ -1,0 +1,43 @@
+.PatchTask {
+	width:80%;
+	margin: 0 auto;
+	background-color:#DA291CFF;
+	transition: all 0.3s ease;
+}
+
+.PatchTask.done {
+	transition: all 0.3s ease;
+	background-color: #53A567FF;
+}
+
+.patchtask_content {
+	display: flex;
+	position: relative;
+	padding-left: 18px;
+}
+
+.cancel {
+	font-size: 25px;
+	outline: none;
+	border: none;
+	background-color: inherit;
+	border-radius: 100%;
+	top: 25px;
+	right: 13px;
+	position: absolute;
+	color: #2A2B2DFF;
+}
+
+.cancel:hover {
+	color: #078282FF;
+}
+
+.patchtask_items {
+	padding-left: 18px;
+	padding-bottom: 18px;
+}
+
+.patchtask_savedelete {
+	padding-left: 18px;
+	padding-bottom: 18px;
+}

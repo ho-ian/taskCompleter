@@ -44,10 +44,10 @@ class Task extends Component {
 		return (
 			<div className="Task">
 				<div className="task_contents">
-					<button type="button" className="task_toggle" onClick={this.toggle}>
-						<h3 className="task_title">{this.props.task.title}</h3>
+					<button type="btn" className="task_toggle" onClick={this.toggle}>
+						<h3 className={"task_title" + ((this.props.task.completed === 'true') ? ' done' : '')}>{this.props.task.title}</h3>
 						<div className="icon">
-							<span className={"chevron" + (this.state.open ? ' in' : '')}></span>
+							<span className={"chevron" + (this.state.open ? ' in' : '') + ((this.props.task.completed === 'true') ? ' done' : '')}></span>
 						</div>
 					</button>
 				</div>
