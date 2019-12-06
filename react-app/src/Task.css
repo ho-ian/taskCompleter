@@ -1,25 +1,25 @@
 .Task {
-	width: 80%;
-	margin: 0 auto;
+	width: 100%;
+	margin: auto;
+	border: 1px solid black;
 }
 
 .task_contents {
 	cursor: pointer;
 	width: 100%;
-	border: none;
 	text-align: left;
 	outline: none;
 	padding: 0;
 	font-size: 15px;
-	
 }
 
+
 .task_toggle {
+	border: 0;
 	width:100%;
 	height:100%;
-	outline: none;
-	border: none;
 	padding: 0;
+	outline: 0;
 	text-align:left;
 	overflow:hidden;
 	white-space:nowrap;
@@ -32,6 +32,10 @@
 
 .task_toggle:hover .chevron{
 	color:#FF291CFF;
+}
+
+.task_toggle:hover .chevron.current {
+	color:#35baf8;
 }
 
 .task_toggle:hover .chevron.done {
@@ -47,6 +51,14 @@
 
 .task_toggle:hover .task_title {
 	color:#FF291CFF;
+}
+
+.task_title.current {
+	color: #56A8CBFF;
+}
+
+.task_toggle:hover .task_title.current {
+	color: #35baf8;
 }
 
 .task_title.done {
@@ -65,6 +77,10 @@
 	display: none;
 	height:0;
 	transition: all 0.3s;
+}
+
+.task_items.current {
+	background-color: #56A8CBFF;
 }
 
 .task_items.done {
@@ -94,6 +110,10 @@
 
 .chevron.in {
 	transform: rotate(315deg);
+}
+
+.chevron.current {
+	color: #56A8CBFF;
 }
 
 .chevron.done {

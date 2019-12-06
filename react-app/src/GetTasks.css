@@ -19,6 +19,8 @@
 .MiddleCell {
 	display:table-cell;
 	width: 60%;
+	padding-left: 90px;
+	padding-right: 100px;
 }
 
 .RightCell {
@@ -32,6 +34,15 @@
 	margin: 0 auto;
 }
 
+.TaskList {
+	height: 70vh;
+	width: 100%;
+	overflow-y: overlay;
+	overflow-x: hidden;
+	padding-right: 30px;
+}
+
+
 input[type="text"] {
 	margin-top: 2px;
 	margin-bottom: 2px;
@@ -44,4 +55,20 @@ input[type="text"] {
 	border: none;
 	height: 25px;
 	width: 179px;
+}
+
+.TaskList::-webkit-scrollbar {
+	width: 10px;
+}
+
+.TaskList::-webkit-scrollbar-track {
+	opacity: 0.5;
+}
+
+.TaskList::-webkit-scrollbar-thumb {
+	background: #2A2B2DFF;
+}
+
+.TaskList::-webkit-scrollbar-thumb:hover {
+	background: #1C1C1BFF;
 }

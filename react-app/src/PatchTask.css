@@ -1,7 +1,12 @@
 .PatchTask {
-	width:80%;
+	width:100%;
 	margin: 0 auto;
 	background-color:#DA291CFF;
+	transition: all 0.3s ease;
+}
+
+.PatchTask.current {
+	background-color: #56A8CBFF;
 	transition: all 0.3s ease;
 }
 

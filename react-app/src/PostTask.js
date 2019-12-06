@@ -33,6 +33,12 @@ class PostTask extends Component {
 			.then(this.props.toggleState())
 			.then(this.reset());
 
+		if (response.status === 201) {
+			this.props.postSuccess();
+		}
+		else {
+			this.props.postFailure();
+		}
 		console.log(body);
 	}
 	
@@ -63,6 +69,10 @@ class PostTask extends Component {
 		});
 	}
 
+	handlePostError(body) {
+		return "Task did not post.\n" + body.error;
+	}
+
 	reset = () => {
 		this.setState({
 			author: '',
@@ -90,6 +100,9 @@ class PostTask extends Component {
 					Start Time<br /> <TimePicker name="start" autoComplete="off" value={(this.state.start === '') ? null : moment(this.state.start, 'HH:mm')} showSecond={false} onChange={this.handleStartTimeChange} /> <br />
 					End Time<br /> <TimePicker name="end" autoComplete="off" value={(this.state.end === '') ? null : moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br /><br />
 					<button className="btn" onClick={ () => { this.handleSubmit(); } }>Post Task</button>
+				</div>
+				<div className="posttask_message">
+
 				</div>
 			</div>
 		);

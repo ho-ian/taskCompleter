@@ -18,13 +18,13 @@
 	z-index:10;
 	margin: 0;
 	padding: 0;
-	color: #078282FF;
+	color: #ffa3a9;
 	overflow: hidden;
 }
 
 .posttask_toggle:hover {
 	background-color: #1C1C1BFF;
-	color: #339E66FF;
+	color: #f59197;
 }
 
 .posttask_items {

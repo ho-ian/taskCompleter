@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import PatchTask from './PatchTask';
 import './Task.css';
 
@@ -38,20 +39,24 @@ class Task extends Component {
 						end={this.props.task.end}
 						completed={this.props.task.completed}
 						toggleEdit={this.toggleEdit}
-						toggleState={this.props.toggleState} />
+						toggleState={this.props.toggleState}
+						patchSuccess={this.props.patchSuccess}
+						patchFailure={this.props.patchFailure}
+						deleteSuccess={this.props.deleteSuccess} />
 			);
 		}
 		return (
 			<div className="Task">
 				<div className="task_contents">
 					<button type="btn" className="task_toggle" onClick={this.toggle}>
-						<h3 className={"task_title" + ((this.props.task.completed === 'true') ? ' done' : '')}>{this.props.task.title}</h3>
+						<h3 className={"task_title" + ((this.props.task.completed === 'true') ? ' done' : '') + ((new moment(this.props.task.date + " " + this.props.task.start, 'MM-DD-YYYY HH:mm')) < new moment() && (new moment() < new moment(this.props.task.date + " " + this.props.task.end, 'MM-DD-YYYY HH:mm')) ? ' current' : '')}>
+							{(new Date(this.props.task.date)).toDateString()} {this.props.task.start} {this.props.task.title}</h3>
 						<div className="icon">
-							<span className={"chevron" + (this.state.open ? ' in' : '') + ((this.props.task.completed === 'true') ? ' done' : '')}></span>
+							<span className={"chevron" + (this.state.open ? ' in' : '') + ((this.props.task.completed === 'true') ? ' done' : '') + ((new moment(this.props.task.date + " " + this.props.task.start, 'MM-DD-YYYY HH:mm')) < new moment() && (new moment() < new moment(this.props.task.date + " " + this.props.task.end, 'MM-DD-YYYY HH:mm')) ? ' current' : '')}></span>
 						</div>
 					</button>
 				</div>
-				<div className={"task_items" + (this.state.open ? ' in' : '') + ((this.props.task.completed === 'true') ? ' done' : '')}>
+				<div className={"task_items" + (this.state.open ? ' in' : '') + ((this.props.task.completed === 'true') ? ' done' : '') + ((new moment(this.props.task.date + " " + this.props.task.start, 'MM-DD-YYYY HH:mm')) < new moment() && (new moment() < new moment(this.props.task.date + " " + this.props.task.end, 'MM-DD-YYYY HH:mm')) ? ' current' : '')}>
 					<h5>{this.props.task.author}</h5>
 					<p>Description: {this.props.task.description}</p>
 					<p>Date: {this.props.task.date}</p>

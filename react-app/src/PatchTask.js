@@ -29,6 +29,12 @@ class PatchTask extends Component {
 		});
 		const body = await response.json().then(this.props.toggleState());
 
+		if (response.status === 200) {
+			this.props.patchSuccess();
+		}
+		else {
+			this.props.patchFailure();
+		}
 		console.log(body);
 	}
 
@@ -40,7 +46,7 @@ class PatchTask extends Component {
 			}
 		});
 		const body = await response.json().then(this.props.toggleState());
-
+		this.props.deleteSuccess();
 		console.log(body);
 	}
 	
@@ -86,7 +92,7 @@ class PatchTask extends Component {
 
 	render () {
 		return (
-			<div className={"PatchTask" + ((this.state.completed === 'true') ? ' done' : '')}>
+			<div className={"PatchTask" + ((this.state.completed === 'true') ? ' done' : '') + ((new moment(this.state.date + " " + this.state.start, 'MM-DD-YYYY HH:mm')) < new moment() && (new moment() < new moment(this.state.date + " " + this.state.end, 'MM-DD-YYYY HH:mm')) ? ' current' : '')}>
 					<div className="patchtask_content">
 						<h3>Editing Task with TaskId: {this.props.taskId}</h3>
 						<button type="btn" className="cancel" onClick={this.props.toggleEdit}>×</button>

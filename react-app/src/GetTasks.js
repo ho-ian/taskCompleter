@@ -156,7 +156,12 @@ class GetTasks extends Component {
 				return new Date(dateA[2], dateA[0], dateA[1], timeA[0], timeA[1]) - new Date(dateB[2], dateB[0], dateB[1], timeB[0], timeB[1]);
 			})
 			.map((task, key) =>
-			<Task task={task} key={task.taskId} toggleState={this.props.toggleState} />
+			<Task task={task}
+				key={task.taskId}
+				toggleState={this.props.toggleState}
+				patchSuccess={this.props.patchSuccess}
+				patchFailure={this.props.patchFailure}
+				deleteSuccess={this.props.deleteSuccess}/>
 		);
 
 		return (
@@ -184,7 +189,9 @@ class GetTasks extends Component {
 								toggleOpenPost={this.props.toggleOpenPost} 
 								openPost={this.props.openPost} 
 								toggleButton={this.toggleButton}
-								button={this.state.button}/>
+								button={this.state.button}
+								postSuccess={this.props.postSuccess}
+								postFailure={this.props.postFailure} />
 						</div>
 					</div>
 				</div>

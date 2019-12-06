@@ -46,6 +46,9 @@ function isValidDate(date) {
 }
 
 function isValidTime(time) {
+    if (time.length === 0) {
+        return false;
+    }
     var parts = time.split(":");
     var hour = parseInt(parts[0], 10);
     var minute = parseInt(parts[1], 10);
