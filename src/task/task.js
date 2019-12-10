@@ -22,6 +22,9 @@ export default function buildMakeTask ({Id, md5, makeSource, isValidDate, isVali
         if (author.length < 2 || author.length > 32) {
             throw new Error("Task author's name must be longer than two characters and shorter than 32 characters.")
         }
+        if (description.length > 350) {
+            throw new Error("Description length cannot be longer than 350 characters.")
+        }
         if (!taskId) {
             throw new Error('Task must contain a taskId')
         }

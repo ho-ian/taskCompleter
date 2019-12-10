@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Task from './Task';
 import PostTask from './PostTask';
+import Tips from './Tips';
 import DatePicker from 'react-datepicker';
 import TimePicker from 'rc-time-picker';
 import moment from 'moment';
@@ -332,6 +333,7 @@ class GetTasks extends Component {
 								End Time<br /> <TimePicker name="end" className="timepicker" autoComplete="off" defaultValue={(this.state.end === '') ? null : moment(this.state.end, 'HH:mm')} showSecond={false} onChange={this.handleEndTimeChange} /> <br /> <br />
 								<input type="checkbox" name="completed" checked={this.state.complete} onChange={this.handleComplete}/>Complete <br />
 								<input type="checkbox" name="completed" checked={this.state.incomplete} onChange={this.handleIncomplete}/>Incomplete <br />
+								<h3>Time Parameters</h3>
 								<input type="checkbox" name="today" checked={this.state.today} onChange={this.handleToday}/>Today <br />
 								<input type="checkbox" name="week" checked={this.state.week} onChange={this.handleWeek}/>Week <br />
 								<input type="checkbox" name="month" checked={this.state.month} onChange={this.handleMonth}/>Month <br />
@@ -350,6 +352,7 @@ class GetTasks extends Component {
 								button={this.state.button}
 								postSuccess={this.props.postSuccess}
 								postFailure={this.props.postFailure} />
+							<Tips className="Tips" />
 						</div>
 					</div>
 				</div>

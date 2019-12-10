@@ -1,0 +1,38 @@
+.tips_content {
+	position: fixed;
+}
+
+.tips_toggle {
+	background-color: #2A2B2DFF;
+	border: none;
+	outline: none;
+	font-size: 18px;
+	width: 60px;
+	height: 30px;
+	color: #ffa3a9;
+	border-radius: 5%;
+}
+
+.tips_toggle:hover {
+	background-color: #1C1C1BFF;
+	color: #f59197;
+}
+
+.tips_items {
+	width: 50%;
+	background: -webkit-linear-gradient(45deg,#ffa3a9,hsla(180,90%,27%,1)),-webkit-linear-gradient(45deg,#ffa3a9,hsla(180,90%,27%,1));
+	box-shadow: 1px 1px 24px 24px rgba(255, 255, 255, .4);
+	display: none;
+	height: 0;
+	transition: all 0.3s ease;
+}
+
+.tips_items.in {
+	padding-left: 90px;
+	padding-right: 100px;
+	position: fixed;
+	display: block;
+	top: 12.5%;
+	left: 17.5%;
+	height: 80%;
+}

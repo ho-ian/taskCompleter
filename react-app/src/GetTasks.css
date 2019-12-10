@@ -42,6 +42,10 @@
 	padding-right: 30px;
 }
 
+.Tips {
+	position: fixed;
+	bottom: 30%;
+}
 
 input[type="text"] {
 	margin-top: 2px;
